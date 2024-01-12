@@ -23,7 +23,15 @@ const Statistics = (props) => {
   )
 }
 
-const StatisticLine = ({text, value}) => <div><p>{text}{value}</p></div>
+const StatisticLine = ({text, value}) => (
+<div>
+  <p>
+    {text === "Positive (%): "
+      ? `${text}${value}%`
+      : `${text}${value}`}
+  </p>
+</div>
+)
 
 const Button = (props) => {
   return (
