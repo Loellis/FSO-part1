@@ -13,24 +13,43 @@ const Statistics = (props) => {
   return (
     <div>
       <h1>Statistics</h1>
-      <StatisticLine text="Good: " value={props.good} />
-      <StatisticLine text="Neutral: " value={props.neutral} />
-      <StatisticLine text="Bad: " value={props.bad} />
-      <StatisticLine text="All: " value={props.allClicks} />
-      <StatisticLine text="Average: " value={props.average} />
-      <StatisticLine text="Positive (%): " value={props.posPercent} />
+      <table>
+        <tbody>
+          <tr>
+            <StatisticLine text="Good: " value={props.good} />
+          </tr>
+          <tr>
+            <StatisticLine text="Neutral: " value={props.neutral} />
+          </tr>
+          <tr>
+            <StatisticLine text="Bad: " value={props.bad} />
+          </tr>
+          <tr>
+            <StatisticLine text="All: " value={props.allClicks} />
+          </tr>
+          <tr>
+            <StatisticLine text="Average: " value={props.average} />
+          </tr>
+          <tr>
+            <StatisticLine text="Positive (%): " value={props.posPercent} />
+          </tr>
+        </tbody>
+      </table>
   </div>
   )
 }
 
 const StatisticLine = ({text, value}) => (
-<div>
-  <p>
-    {text === "Positive (%): "
-      ? `${text}${value}%`
-      : `${text}${value}`}
-  </p>
-</div>
+<>
+  <td>
+    {text}
+  </td>
+  <td>
+    {text === "Positive (%): " 
+      ? `${value}%`
+      : `${value}`}
+  </td>
+</>
 )
 
 const Button = (props) => {
@@ -67,8 +86,8 @@ const App = () => {
   }
 
   const calculateStatistics = (good, bad, allClicks) => {
-    setAverage((good - bad) / allClicks);
-    setPositivePercentage((good / allClicks) * 100);
+    setAverage(((good - bad) / allClicks).toFixed(1));
+    setPositivePercentage(((good / allClicks) * 100).toFixed(1));
   };
 
 
