@@ -44,13 +44,18 @@ const App = () => {
     setPoints(copy)
   }
 
+  const findMostVotedForAnecdoteIndex = () => points.indexOf(Math.max(...points))
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <AnecdoteLine text={anecdotes[selected]} points={points[selected]}/>
       <div style={{ display: 'flex', gap: '2px'}}>
         <Button handleClick={voteForCurrentAnecdote} text="Vote" />
         <Button handleClick={getRandomAnecdote} text="Next anecdote" />
       </div>
+      <h1>Anecdote with the most votes</h1>
+      <AnecdoteLine text={anecdotes[findMostVotedForAnecdoteIndex()]} points={points[findMostVotedForAnecdoteIndex()]}/>
     </div>
   )
 }
