@@ -10,6 +10,15 @@ const Button = (props) => {
   )
 }
 
+const AnecdoteLine = (props) => {
+  return (
+    <div>
+      <p>{props.text}</p>
+      <p>has {props.points} votes</p>
+    </div>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -21,7 +30,8 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-  
+
+  const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
   const [selected, setSelected] = useState(0)
 
   // Generates a random integer from 0 to rangeMax - 1
@@ -29,11 +39,19 @@ const App = () => {
 
   const getRandomAnecdote = () => setSelected(generateRandomInt(anecdotes.length))
 
+  const voteForCurrentAnecdote = () => {
+    const copy = [...points]
+    copy[selected]++
+    setPoints(copy)
+  }
 
   return (
     <div>
-      {anecdotes[selected]} <br></br>
-      <Button handleClick={getRandomAnecdote} text="Next anecdote" />
+      <AnecdoteLine text={anecdotes[selected]} points={points[selected]}/>
+      <div style={{ display: 'flex', gap: '2px'}}>
+        <Button handleClick={voteForCurrentAnecdote} text="Vote" />
+        <Button handleClick={getRandomAnecdote} text="Next anecdote" />
+      </div>
     </div>
   )
 }
