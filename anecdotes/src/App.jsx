@@ -13,8 +13,7 @@ const Button = (props) => {
 const AnecdoteLine = (props) => {
   return (
     <div>
-      <p>{props.text}</p>
-      <p>has {props.points} votes</p>
+      <p>{props.text}<br></br>has {props.points} votes</p>
     </div>
   )
 }
